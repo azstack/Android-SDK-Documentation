@@ -203,7 +203,7 @@ azStackClient.registerContactListener(AzStackContactListener instance)
 In order for a user to chat or call, you must authenticate them first. AZStack will accept any unique String as a User ID (UIDs, email addresses, phone numbers, usernames, etc), so you can use any new or existing User Management system. As part of the Authentication process, you will need to set up a Web Service which generates a unique Identity Token for each user on request
 You should start authentication process after AZStack SDK connectes successfully. The process is described in the following model:
 
-![AZStack init and authentication](http://azstack.com/docs/static/IosAuthentication.png "AZStack init and authentication")
+![AZStack init and authentication](https://drive.google.com/file/d/0B_g45o76OWYlWldidGhSaXR1Sm8/view?usp=sharing "AZStack init and authentication")
 
 #### Connect AZStack Server
 ```
