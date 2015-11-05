@@ -6,7 +6,7 @@ When you create account successfully, AZStack provide you an application ID(appI
 
 # 2. Settup and installation
 AZStack SDK is built and designed to be used with Android Studio. The following instructions will help you to integrate AZStack into your application:
-### 2.1. Adding AAR()
+### 2.1. Adding AAR
 Copy AZStack.aar to libs folder at the app level
 Navigate to build.gradle file at the app level and adding the following lines:
 ```
@@ -183,7 +183,7 @@ The AZStack SDK requires some permissions and references from your app's Android
 ### 3.1 Instantiate
 Each application must register with AZStack for 1 appID. For example: 
 ```
-String appId = "e5a620eb763aa73452caa081395bf655";   
+String appId = "26870527d2ac628002dda81be54217cf";   
 ```
 
 The AZStack SDK has a primary interface AzStackClient for interacting with AZStack service. You have to initialize AzStackClient object in onCreate() method of your Application or your main Activity. Only once instance of AzStackClient should be instantiated and used all time:
@@ -203,7 +203,7 @@ azStackClient.registerContactListener(AzStackContactListener instance)
 In order for a user to chat or call, you must authenticate them first. AZStack will accept any unique String as a User ID (UIDs, email addresses, phone numbers, usernames, etc), so you can use any new or existing User Management system. As part of the Authentication process, you will need to set up a Web Service which generates a unique Identity Token for each user on request
 You should start authentication process after AZStack SDK connectes successfully. The process is described in the following model:
 
-![AZStack init and authentication](http://azstack.com/docs/static/IosAuthentication.png "AZStack init and authentication")
+![AZStack init and authentication](http://azstack.com/docs/static/AndroidAuthentication.png "AZStack init and authentication")
 
 #### Connect AZStack Server
 ```
