@@ -1,10 +1,16 @@
-# 1. Create AZStack account
+# 1. Quick Start
 AZStack is the full-stack building block for communications.
-To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here(link) or get account from AZStack team.
-When you create account successfully, AZStack provide you an application ID(appId) to be used in your application(client) and a RSA public key to be used on server side
+This Quick Start guide will help you run a sample project powered by AZStack as fast as possible. To run the sample project, you will need Android Studio installed
 
+```
+1. Clone sample project from git hub: 
+https://github.com/azstack/Android-SDK-Sample-Project.git
+2. Open and run in Android Studio
+```
 
 # 2. Settup and installation
+To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here(coming soon) or get account from AZStack team.
+When you create account successfully, AZStack provide you an application ID(appId) to be used in your application(client) and a RSA public key to be used on server side
 AZStack SDK is built and designed to be used with Android Studio. The following instructions will help you to integrate AZStack into your application:
 ### 2.1. Adding AAR
 Copy AZStack.aar to libs folder at the app level
@@ -286,43 +292,18 @@ AzStackContactListener need to be registered when initialize AzStackClient objec
 
 ```
 azStackClient.registerContactListener(new AzStackContactListener() {
-
             @Override
-            public void getUserInfoForReceiverMessage(String appUserId) {
-				// 
+            public void getUserInfo(String azStackUserId) {
                 // This code implemention is only for testing purpose
                 // When going into production, you have to implement your own
                 // web service to get your app's user info
-                AzContact user = getUserInfo(appUserId);
-				
-				// After got user info, you must call this method
-                azStackClient.getUserInfoForReceiverMessageComplete(user);
+                AzContact user = Utils.getUserInfo(azStackUserId);
+                azStackClient.getUserInfoComplete(user);
             }
 
             @Override
-            public void getUserInfoForChatting(String appUserId) {
-                // This code implemention is only for testing purpose
-                // When going into production, you have to implement your own
-                // web service to get your app's user info
-                AzContact user = getUserInfo(appUserId);
-				
-				// After got user info, you must call this method
-                azStackClient.getUserInfoForChattingComplete(user);
-            }
+            public void viewContactInfo(String s) {
 
-            @Override
-            public List<AzContact> getListFriend() {
-                return null;
-            }
-
-            @Override
-            public void viewContactInfo(String appUserId) {
-
-            }
-
-            @Override
-            public String getPhoneNumberOfContact(String appUserId) {
-                return null;
             }
         });
 ```
@@ -393,18 +374,23 @@ public class MyGcmListenerService extends GcmListenerService {
 
 ### 3.5 Start chat
 ```
-azStackClient.startChat(appUserId, name, avatar);
+azStackClient.startChat(azStackUserId, name, avatar);
 
-Parameter: 	appUserId: identifier of app’s user, required
+Parameter: 	azStackUserId: identifier of app’s user, required
 			name: name of app’s user, default “No name”, optional
 			avatar: avatar of app’s user, optional
 ```
 
 ### 3.6 Start call
 ```
-azStackClient.startCall(appUserId, name, avatar);
+azStackClient.startCall(azStackUserId, name, avatar);
 
-Parameter: 	appUserId: identifier of app’s user, required
+Parameter: 	azStackUserId: identifier of app’s user, required
 			name: name of app’s user, default “No name”, optional
 			avatar: avatar of app’s user, optional
+```
+
+### 3.7 Disconnect
+```
+azStackClient.disconnect();
 ```
