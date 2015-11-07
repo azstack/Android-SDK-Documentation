@@ -302,7 +302,7 @@ azStackClient.registerContactListener(new AzStackContactListener() {
             }
 
             @Override
-            public void viewContactInfo(String s) {
+            public void viewContactInfo(String azStackUserId) {
 
             }
         });
