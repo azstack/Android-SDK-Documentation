@@ -309,18 +309,21 @@ azStackClient.registerContactListener(new AzStackContactListener() {
 ```
 
 ### 3.4 Push notification
-If you need push notification for your app, instantiate AzStackClient with GCM sender id via Options object:
+First, following this link https://developers.google.com/cloud-messaging/android/start to create your project, get project number(called sender id), get configuration file google-services.json.
+Copy google-services.json file into the app/ directory of your Android Studio project.
+
+Instantiate AzStackClient with your sender id via Options object.
 ```
 AzOptions azOptions = new AzOptions ();
-azOptions.setGoogleCloudMessagingId(appId);			
+azOptions.setGoogleCloudMessagingId(senderId);			
 AzStackClient azStackClient = AzStackClient.newInstance(this, appId, azOptions);
 ```
 
 You have to declare some permissions for push notification in AndroidManifest.xml
 ```
-<permission android:name="com.mypackage.permission.C2D_MESSAGE"
+<permission android:name="{your package name}.permission.C2D_MESSAGE"
     android:protectionLevel="signature" />
-<uses-permission android:name="com.bchat.permission.C2D_MESSAGE" />
+<uses-permission android:name="{your package name}.permission.C2D_MESSAGE" />
 <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -335,7 +338,7 @@ Add receivers and services to AndroidManifest.xml
     android:permission="com.google.android.c2dm.permission.SEND" >
     <intent-filter>
         <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <category android:name="com.mypackage" />
+        <category android:name="{your package name}" />
     </intent-filter>
 </receiver>
 <!-- [END gcm_receiver] -->
