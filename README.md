@@ -3,8 +3,7 @@ AZStack is the full-stack building block for communications.
 This Quick Start guide will help you run a sample project powered by AZStack as fast as possible. To run the sample project, you will need Android Studio installed
 
 ```
-1. Clone sample project from git hub: 
-https://github.com/azstack/Android-SDK-Sample-Project.git
+1. Clone sample project from git hub: https://github.com/azstack/Android-SDK-Sample-Project.git
 2. Open and run in Android Studio
 ```
 
@@ -395,6 +394,36 @@ Parameter: 	azStackUserId: identifier of app’s user, required
 ```
 
 ### 3.7 Disconnect
+Disconnect from AZStack server
+
 ```
 azStackClient.disconnect();
 ```
+
+### 3.8 Logout
+Disconnect from AZStack server and clear all cached data on client
+
+```
+azStackClient.logout();
+```
+
+# 4. UI customization
+AZStack SDK allows developers to change some basic attributes of chat, call screen via AzUI object.
+
+```
+AzUI azUI = AzUI.getInstance();
+```
+
+Change the color of the actionbar, call background:
+
+```
+azUI.setHeaderColor(0xff4caf50);
+```
+
+Change the notification icon:
+
+```
+azUI.setNotificationIcon(R.mipmap.your_icon);
+```
+
+These methods need to be called only once time when you initialize AZStack SDK
