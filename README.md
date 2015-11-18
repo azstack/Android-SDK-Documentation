@@ -62,116 +62,83 @@ The AZStack SDK requires some permissions and references from your app's Android
         android:label="@string/app_name">
         <activity
             android:name="com.azstack.activity.ChatActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.azstack.activity.ChatGroupActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.azstack.activity.FreeCallActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.IncomingCallActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.RecentDetailActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.ViewPhotoActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.ReviewPhotoActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.ConversationActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.GroupListActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.GroupInfoActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.GalleryRootActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.GalleryDirectoryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.SendLocationActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.ShowLocationActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.CropImageActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.ListStickerActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.StickerDetailActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.ForwardActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.ChooseMultiContactActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.FileExplorerActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.ChooseOneContactChatActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.ChooseOneContactActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="com.azstack.activity.ChatSlidingMenu"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.azstack.activity.GunDrawActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.GunGGalleryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.azstack.activity.GunGDirectoryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -197,11 +164,11 @@ AzStackClient azStackClient = AzStackClient.newInstance(context, appId);
 ```
 
 ### 3.2 Listeners
-The AZStack SDK uses listener pattern to push specific events to your application. You need register 3 listeners AzStackConnectListener, AzStackAuthenticateListener, AzStackContactListener.
+The AZStack SDK uses listener pattern to push specific events to your application. You need register 3 listeners AzStackConnectListener, AzStackAuthenticateListener, AzStackUserListener.
 ```
 azStackClient.registerConnectionListenter(AzStackConnectListener instance)
 azStackClient.registerAuthenticateListenter(AzStackAuthenticateListener instance)
-azStackClient.registerContactListener(AzStackContactListener instance)
+azStackClient.registerUserListener(AzStackUserListener instance)
 ```
 
 ### 3.3 Connect and authenticate
@@ -286,23 +253,29 @@ Authentication token is generated by encrypting the following information:
 ```
 using RSA publicKey generated in step 1. You can refer to https://github.com/azstack/Backend-example/blob/master/gen_token_test.php for sample code.
 
-### 3.4 AzStackContactListener
-AzStackContactListener need to be registered when initialize AzStackClient object. It's used to get basic information of app's user such as: name, avatar... to display on chat, call screen.
+### 3.4 AzStackUserListener
+AzStackUserListener need to be registered when initialize AzStackClient object. It's used to get basic information of app's user such as: name, avatar... to display on chat, call screen.
 
 ```
-azStackClient.registerContactListener(new AzStackContactListener() {
+azStackClient.registerUserListener(new AzStackUserListener() {
+
             @Override
-            public void getUserInfo(String azStackUserId) {
+            public void getUserInfo(String azStackUserId, int purpose) {
                 // This code implemention is only for testing purpose
                 // When going into production, you have to implement your own
                 // web service to get your app's user info
-                AzContact user = Utils.getUserInfo(azStackUserId);
-                azStackClient.getUserInfoComplete(user);
+                JSONObject obContact = Utils.getUserInfo(azStackUserId);
+                azStackClient.getUserInfoComplete(obContact, purpose);
             }
 
             @Override
-            public void viewContactInfo(String azStackUserId) {
+            public void viewUserInfo(String appUserId) {
 
+            }
+
+            @Override
+            public JSONArray getListFriend() {
+                return null;
             }
         });
 ```
