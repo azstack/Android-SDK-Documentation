@@ -303,7 +303,7 @@ Note the alphanumeric API Key. You will need to input this key into the AZStack 
 ![AZStack GCM](http://azstack.com/docs/static/gcm/7.png "AZStack GCM")
 
 #### Set up Google Cloud Messaging in AZStack Dashboard
-Update as soon as the Dashboard released. Currently, please contact us to update Server API key directly.
+Update soon when the Dashboard is released. Currently, please contact us to update Server API key directly.
 #### Set up Google Cloud Messaging in client code
 First, following this link https://developers.google.com/cloud-messaging/android/start to get configuration file google-services.json.
 
@@ -411,18 +411,18 @@ AZStack SDK allows developers to change some basic attributes of chat, call scre
 AzUI azUI = AzUI.getInstance();
 ```
 
-#4.1 Change the color of the actionbar, call background:
+###4.1 Change the color of the actionbar, call background:
 
 ```
 azUI.setHeaderColor(0xff4caf50);
 ```
 
-#4.2 Change the notification icon:
+###4.2 Change the notification icon:
 
 ```
 azUI.setNotificationIcon(R.mipmap.your_icon);
 ```
-#4.3 Show/hide call menu in chat screen
+###4.3 Show/hide call menu in chat screen
 ```
 azUI.setCallEnabled(boolean);
 ```
