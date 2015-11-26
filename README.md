@@ -65,14 +65,14 @@ The AZStack SDK requires some permissions and references from your app's Android
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@style/AzStackTheme.Light"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.azstack.activity.ChatGroupActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@style/AzStackTheme.Light"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.azstack.activity.FreeCallActivity"
@@ -88,44 +88,44 @@ The AZStack SDK requires some permissions and references from your app's Android
             android:name="com.azstack.activity.ViewPhotoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name="com.azstack.activity.ReviewPhotoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name="com.azstack.activity.ConversationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.GroupListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.GroupInfoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.SendLocationActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.ShowLocationActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.ForwardActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.FileExplorerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@style/AzStackTheme.Light"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="com.azstack.activity.GunDrawActivity"
@@ -134,11 +134,15 @@ The AZStack SDK requires some permissions and references from your app's Android
         <activity
             android:name="com.azstack.activity.GunGGalleryActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.GunGDirectoryActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
+        <activity
+            android:name="com.azstack.activity.SelectContactChatGroupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AzStackTheme.Light" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -281,7 +285,27 @@ azStackClient.registerUserListener(new AzStackUserListener() {
 ```
 
 ### 3.4 Push notification
-First, following this link https://developers.google.com/cloud-messaging/android/start to create your project, get project number(called sender id), get configuration file google-services.json.
+#### Set up Google Cloud Messaging on Web
+
+Go to the Google Developer Console(https://console.developers.google.com/) and click Create a project
+![AZStack GCM](http://azstack.com/docs/static/gcm/1.png "AZStack GCM")
+Select the newly project and note the numeric Project number. This number is used for initializing AZStack SDK.
+![AZStack GCM](http://azstack.com/docs/static/gcm/2.png "AZStack GCM")
+Under API Manager, make sure that Google Cloud Messaging API is enabled. To do so, on the left menu navigate to API Manager -> Google APIs -> Mobile APIs, find Google Cloud Messaging and enable it.
+![AZStack GCM](http://azstack.com/docs/static/gcm/3.png "AZStack GCM")
+Next, you must create new Server API key under API Manager -> Credentials -> Add Credentials
+![AZStack GCM](http://azstack.com/docs/static/gcm/4.png "AZStack GCM")
+Choose Server key from popup
+![AZStack GCM](http://azstack.com/docs/static/gcm/5.png "AZStack GCM")
+Type 0.0.0.0/0 in the IP addresses field and Create
+![AZStack GCM](http://azstack.com/docs/static/gcm/6.png "AZStack GCM")
+Note the alphanumeric API Key. You will need to input this key into the AZStack Dashboard.
+![AZStack GCM](http://azstack.com/docs/static/gcm/7.png "AZStack GCM")
+
+#### Set up Google Cloud Messaging in AZStack Dashboard
+Update as soon as the Dashboard released. Currently, please contact us to update Server API key directly.
+#### Set up Google Cloud Messaging in client code
+First, following this link https://developers.google.com/cloud-messaging/android/start to get configuration file google-services.json.
 
 Copy google-services.json file into the app/ directory of your Android Studio project.
 
@@ -387,16 +411,20 @@ AZStack SDK allows developers to change some basic attributes of chat, call scre
 AzUI azUI = AzUI.getInstance();
 ```
 
-Change the color of the actionbar, call background:
+#4.1 Change the color of the actionbar, call background:
 
 ```
 azUI.setHeaderColor(0xff4caf50);
 ```
 
-Change the notification icon:
+#4.2 Change the notification icon:
 
 ```
 azUI.setNotificationIcon(R.mipmap.your_icon);
+```
+#4.3 Show/hide call menu in chat screen
+```
+azUI.setCallEnabled(boolean);
 ```
 
 These methods need to be called only once time when you initialize AZStack SDK
