@@ -284,94 +284,6 @@ azStackClient.registerUserListener(new AzStackUserListener() {
         });
 ```
 
-### 3.4 Push notification
-#### Set up Google Cloud Messaging on Web
-
-Go to the Google Developer Console(https://console.developers.google.com/) and click Create a project
-![AZStack GCM](http://azstack.com/docs/static/gcm/1.png "AZStack GCM")
-Select the newly project and note the numeric Project number. This number is used for initializing AZStack SDK.
-![AZStack GCM](http://azstack.com/docs/static/gcm/2.png "AZStack GCM")
-Under API Manager, make sure that Google Cloud Messaging API is enabled. To do so, on the left menu navigate to API Manager -> Google APIs -> Mobile APIs, find Google Cloud Messaging and enable it.
-![AZStack GCM](http://azstack.com/docs/static/gcm/3.png "AZStack GCM")
-Next, you must create new Server API key under API Manager -> Credentials -> Add Credentials
-![AZStack GCM](http://azstack.com/docs/static/gcm/4.png "AZStack GCM")
-Choose Server key from popup
-![AZStack GCM](http://azstack.com/docs/static/gcm/5.png "AZStack GCM")
-Type 0.0.0.0/0 in the IP addresses field and Create
-![AZStack GCM](http://azstack.com/docs/static/gcm/6.png "AZStack GCM")
-Note the alphanumeric API Key. You will need to input this key into the AZStack Dashboard.
-![AZStack GCM](http://azstack.com/docs/static/gcm/7.png "AZStack GCM")
-
-#### Set up Google Cloud Messaging in AZStack Dashboard
-Update soon when the Dashboard is released. Currently, please contact us to update Server API key directly.
-#### Set up Google Cloud Messaging in client code
-First, following this link https://developers.google.com/cloud-messaging/android/start to get configuration file google-services.json.
-
-Copy google-services.json file into the app/ directory of your Android Studio project.
-
-Instantiate AzStackClient with your sender id via Options object.
-```
-AzOptions azOptions = new AzOptions ();
-azOptions.setGoogleCloudMessagingId(senderId);			
-AzStackClient azStackClient = AzStackClient.newInstance(this, appId, azOptions);
-```
-
-You have to declare some permissions for push notification in AndroidManifest.xml
-```
-<permission android:name="{your package name}.permission.C2D_MESSAGE"
-    android:protectionLevel="signature" />
-<uses-permission android:name="{your package name}.permission.C2D_MESSAGE" />
-<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-<uses-permission android:name="android.permission.WAKE_LOCK" />
-```
-
-Add receivers and services to AndroidManifest.xml
-```
-<!-- [START gcm_receiver] -->
-<receiver
-    android:name="com.google.android.gms.gcm.GcmReceiver"
-    android:exported="true"
-    android:permission="com.google.android.c2dm.permission.SEND" >
-    <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <category android:name="{your package name}" />
-    </intent-filter>
-</receiver>
-<!-- [END gcm_receiver] -->
-
-<!-- [START gcm_service] -->
-<service
-    android:name=".MyGcmListenerService"
-    android:exported="false" >
-    <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-    </intent-filter>
-</service>
-<service
-    android:name="com.azstack.AzStackInstanceIDListenerService"
-    android:exported="false" >
-    <intent-filter>
-        <action android:name="com.google.android.gms.iid.InstanceID" />
-    </intent-filter>
-</service>
-<service
-    android:name="com.azstack.RegistrationIntentService"
-    android:exported="false" />
-<!-- [END gcm_service] -->
-```
-
-Finally, create your own service extends GcmListenerService:
-```
-public class MyGcmListenerService extends GcmListenerService {
-
-    @Override
-    public void onMessageReceived(String from, Bundle data) {
-        // Implement connect AZStack service here
-    }
-}
-```
-
 ### 3.5 Start chat
 ```
 azStackClient.startChat(azStackUserId, name, avatar);
@@ -404,25 +316,115 @@ Disconnect from AZStack server and clear all cached data on client
 azStackClient.logout();
 ```
 
-# 4. UI customization
+# 4. Push notification
+### 4.1 Set up Google Cloud Messaging on Web
+
+Go to the Google Developer Console(https://console.developers.google.com/) and click Create a project
+![AZStack GCM](http://azstack.com/docs/static/gcm/1.png "AZStack GCM")
+Select the newly project and note the numeric Project number. This number is used for initializing AZStack SDK.
+![AZStack GCM](http://azstack.com/docs/static/gcm/2.png "AZStack GCM")
+Under API Manager, make sure that Google Cloud Messaging API is enabled. To do so, on the left menu navigate to API Manager -> Google APIs -> Mobile APIs, find Google Cloud Messaging and enable it.
+![AZStack GCM](http://azstack.com/docs/static/gcm/3.png "AZStack GCM")
+Next, you must create new Server API key under API Manager -> Credentials -> Add Credentials
+![AZStack GCM](http://azstack.com/docs/static/gcm/4.png "AZStack GCM")
+Choose Server key from popup
+![AZStack GCM](http://azstack.com/docs/static/gcm/5.png "AZStack GCM")
+Type 0.0.0.0/0 in the IP addresses field and Create
+![AZStack GCM](http://azstack.com/docs/static/gcm/6.png "AZStack GCM")
+Note the alphanumeric API Key. You will need to input this key into the AZStack Dashboard.
+![AZStack GCM](http://azstack.com/docs/static/gcm/7.png "AZStack GCM")
+
+### 4.2 Set up Google Cloud Messaging in AZStack Dashboard
+Update soon when the Dashboard is released. Currently, please contact us to update Server API key directly.
+### 4.3 Set up Google Cloud Messaging in client code
+First, following this link https://developers.google.com/cloud-messaging/android/start to get configuration file google-services.json.
+
+Copy google-services.json file into the app/ directory of your Android Studio project.
+
+Instantiate AzStackClient with your sender id via Options object.
+```
+AzOptions azOptions = new AzOptions ();
+azOptions.setGoogleCloudMessagingId(senderId);			
+AzStackClient azStackClient = AzStackClient.newInstance(this, appId, azOptions);
+```
+
+You have to declare some permissions for push notification in AndroidManifest.xml
+```
+<permission android:name="{your package name}.permission.C2D_MESSAGE"
+    android:protectionLevel="signature" />
+<uses-permission android:name="{your package name}.permission.C2D_MESSAGE" />
+<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+```
+
+Add receivers and services to AndroidManifest.xml. Note that you must create your own gcm listener service extends GcmListenerService to receive push message.
+```
+<!-- [START gcm_receiver] -->
+<receiver
+    android:name="com.google.android.gms.gcm.GcmReceiver"
+    android:exported="true"
+    android:permission="com.google.android.c2dm.permission.SEND" >
+    <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <category android:name="{your package name}" />
+    </intent-filter>
+</receiver>
+<!-- [END gcm_receiver] -->
+
+<!-- [START gcm_service] -->
+<service
+    android:name="{your package}.MyGcmListenerService"
+    android:exported="false" >
+    <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+    </intent-filter>
+</service>
+<service
+    android:name="com.azstack.AzStackInstanceIDListenerService"
+    android:exported="false" >
+    <intent-filter>
+        <action android:name="com.google.android.gms.iid.InstanceID" />
+    </intent-filter>
+</service>
+<service
+    android:name="com.azstack.RegistrationIntentService"
+    android:exported="false" />
+<!-- [END gcm_service] -->
+```
+
+Finally, create your own service extends GcmListenerService:
+```
+public class MyGcmListenerService extends GcmListenerService {
+
+    @Override
+    public void onMessageReceived(String from, Bundle data) {
+        // Implement connect AZStack service here
+    }
+}
+```
+
+In onMessageReceived method, you only need connect to AZStack service as described in #3.
+
+# 5. UI customization
 AZStack SDK allows developers to change some basic attributes of chat, call screen via AzUI object.
 
 ```
 AzUI azUI = AzUI.getInstance();
 ```
 
-###4.1 Change the color of the actionbar, call background:
+###5.1 Change the color of the actionbar, call background:
 
 ```
 azUI.setHeaderColor(0xff4caf50);
 ```
 
-###4.2 Change the notification icon:
+###5.2 Change the notification icon:
 
 ```
 azUI.setNotificationIcon(R.mipmap.your_icon);
 ```
-###4.3 Show/hide call menu in chat screen
+###5.3 Show/hide call menu in chat screen
 ```
 azUI.setCallEnabled(boolean);
 ```
