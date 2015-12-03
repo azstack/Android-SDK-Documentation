@@ -78,12 +78,12 @@ The AZStack SDK requires some permissions and references from your app's Android
             android:name="com.azstack.activity.FreeCallActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.IncomingCallActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.ViewPhotoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
