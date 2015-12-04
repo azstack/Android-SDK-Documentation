@@ -27,7 +27,7 @@ dependencies {
 ```
 
 ### 2.2. AndroidManifest.xml
-#### Set up permissions and re
+#### Set up permissions and references
 The AZStack SDK requires some permissions(activities, gcm receivers, google map api key...) and references from your app's AndroidManifest.xml file. These permissions allow the SDK to monitor network state and receive Google Cloud Messaging messages... Below is an example with a com.example package; replace with your own package when merging with your own manifest.
 ```
 <?xml version="1.0" encoding="utf-8"?>
