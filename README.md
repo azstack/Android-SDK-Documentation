@@ -293,18 +293,20 @@ In the getUserInfo(String azStackUserId, int purpose) method, you must return ap
 # 4. API
 ### 4.1 Start chat
 ```
-azStackClient.startChat(azStackUserId, name, avatar);
+azStackClient.startChat(Context context, String azStackUserId, String name, String avatar);
 
-Parameter: 	azStackUserId: identifier of app’s user, required
+Parameter: 	context: The context to start chat
+			azStackUserId: identifier of app’s user, required
 			name: name of app’s user, default “No name”, optional
 			avatar: avatar of app’s user, optional
 ```
 
 ### 4.2 Start call
 ```
-azStackClient.startCall(azStackUserId, name, avatar);
+azStackClient.startCall(Context context, String azStackUserId, String name, String avatar);
 
-Parameter: 	azStackUserId: identifier of app’s user, required
+Parameter: 	context: The context to start call
+			azStackUserId: identifier of app’s user, required
 			name: name of app’s user, default “No name”, optional
 			avatar: avatar of app’s user, optional
 ```
