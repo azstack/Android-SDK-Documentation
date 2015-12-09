@@ -272,7 +272,7 @@ azStackClient.registerUserListener(new AzStackUserListener() {
                 // This code implemention is only for testing purpose
                 // When going into production, you have to implement your own
                 // web service to get your app's user info
-                JSONObject obContact = Utils.getUserInfo(azStackUserId);
+                JSONObject obContact = getUserInfo(azStackUserId);
                 azStackClient.getUserInfoComplete(obContact, purpose);
             }
 
@@ -283,7 +283,11 @@ azStackClient.registerUserListener(new AzStackUserListener() {
 
             @Override
             public JSONArray getListFriend() {
-                return null;
+				// This code implemention is only for testing purpose
+                // When going into production, you have to implement your own
+                // web service to get list user info
+				JSONArray jsonArray = getListUserInfo();
+                return jsonArray;
             }
         });
 ```
@@ -311,14 +315,23 @@ Parameter: 	context: The context to start call
 			avatar: avatar of app’s user, optional
 ```
 
-### 4.3 Disconnect
+### 4.3 Create group chat
+```
+azStackClient.createGroup(Context context);
+
+Parameter: 	context: The context to create group
+```
+When create new group chat, the app navigates to select users screen. To make this screen work fine, you must implement the method getListFriend() of AzStackUserListener when initialize AZStack service. 
+In getListFriend() method, list user info is returned via JSONArray object. You can check the sample for more detail how to implement this method.
+
+### 4.4 Disconnect
 Disconnect from AZStack server
 
 ```
 azStackClient.disconnect();
 ```
 
-### 4.4 Logout
+### 4.5 Logout
 Disconnect from AZStack server and clear all cached data on client
 
 ```
