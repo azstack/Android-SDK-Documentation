@@ -8,8 +8,8 @@ This Quick Start guide will help you run a sample project powered by AZStack as 
 ```
 
 # 2. Settup and installation
-To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here(coming soon) or get account from AZStack team.
-When you create account successfully, AZStack provide you an application ID(appId) to be used in your application(client) and a RSA public key to be used on server side
+To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://beta.developer.azstack.com.
+When you create account successfully, AZStack provide you an application ID(appId) and a RSA public key to be used in your application.
 AZStack SDK is built and designed to be used with Android Studio. The following instructions will help you to integrate AZStack into your application:
 ### 2.1. Adding AAR
 Copy AZStack.aar to libs folder at the app level
@@ -161,105 +161,57 @@ AZStack SDK has sending location function which using Google Maps Android API. I
 
 # 3. Connecting
 ### 3.1 Instantiate
-Each application must register with AZStack for 1 appID. For example: 
+Each application must register with AZStack for 1 appID, 1 RSA public key. For example: 
 ```
 String appId = "26870527d2ac628002dda81be54217cf";   
+String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq9s407QkMiZkXF0juCGj ti6iWUDzqEmP+Urs3+g2zOf+rbIAZVZItS5a4BZlv3Dux3Xnmhrz240OZMBO1cNc poEQNij1duZlpJY8BJiptlrj3C+K/PSp0ijllnckwvYYpApm3RxC8ITvpmY3IZTr RKloC/XoRe39p68ARtxXKKW5I/YYxFucY91b6AEOUNaqMFEdLzpO/Dgccaxoc+N1 SMfZOKue7aH0ZQIksLN7OQGVoiuf9wR2iSz3+FA+mMzRIP+lDxI4JE42Vvn1sYmM CY1GkkWUSzdQsfgnAIvnbepM2E4/95yMdRPP/k2Qdq9ja/mwEMTfA0yPUZ7Liywo ZwIDAQAB"
 ```
 
-The AZStack SDK has a primary interface AzStackClient for interacting with AZStack service. You have to initialize AzStackClient object in onCreate() method of your Application or your main Activity. Only once instance of AzStackClient should be instantiated and used all time:
+The AZStack SDK has a primary interface AzStackClient for interacting with AZStack service. You have to initialize AzStackClient object in onCreate() method of your Application or your main Activity.. Only once instance of AzStackClient should be instantiated and used all time:
 ```
-AzStackClient azStackClient = AzStackClient.newInstance(context, appId);
+AzStackClient azStackClient = AzStackClient.newInstance(context, appId, publicKey, userCredentials);
 ```
 
 ### 3.2 Listeners
-The AZStack SDK uses listener pattern to push specific events to your application. You must register 3 listeners AzStackConnectListener, AzStackAuthenticateListener, AzStackUserListener.
+The AZStack SDK uses listener pattern to push specific events to your application. You must register 2 listeners AzStackConnectListener, AzStackUserListener.
 ```
 azStackClient.registerConnectionListenter(AzStackConnectListener instance)
-azStackClient.registerAuthenticateListenter(AzStackAuthenticateListener instance)
 azStackClient.registerUserListener(AzStackUserListener instance)
 ```
 
 ### 3.3 Connect and authenticate
-In order for a user to chat or call, you must authenticate them first. AZStack will accept any unique String as a User ID (UIDs, email addresses, phone numbers, usernames, etc), so you can use any new or existing User Management system. As part of the Authentication process, you will need to set up a Web Service which generates a unique Identity Token for each user on request
-You should start authentication process after AZStack SDK connected successfully. The process is described in the following model:
+In order for a user to chat or call, you must authenticate them first. AZStack will accept any unique String as a User ID (UIDs, email addresses, phone numbers, usernames, etc), so you can use any new or existing User Management system.
+The process is described in the following model:
 
-![AZStack init and authentication](http://azstack.com/docs/static/AndroidAuthentication_3.png "AZStack init and authentication")
+![AZStack init and authentication](http://azstack.com/docs/static/AndroidAuthentication2.png "AZStack init and authentication")
 
-#### Connect AZStack Server
+#### Connect and authenticate AZStack Server
+Connect and authenticate with AZStack Server with your azStackUserId and your name
 ```
-azStackClient.connect();
+azStackClient.connect(String azStackUserId, String name);
 ```
 
-You must register AzStackConnectListener for listening connection's events such as: connected, disconnected, connect failed...
+You must register AzStackConnectListener for listening connection,authentication events such as: connected, disconnected, connect failed...
 ```
 azStackClient.registerConnectionListenter(new AzStackConnectListener() {
 
 			@Override
 			public void onConnectionError(AzStackClient client,
 					AzStackException e) {
-				//Connect to AZStack Server fail 
+				// Connect or authenticate unsuccessfully
 			}
 
 			@Override
 			public void onConnectionDisconnected(AzStackClient client) {
-				//Disconnect AZStack Server
+				// Disconnected from AZStack service
 			}
 
 			@Override
 			public void onConnectionConnected(AzStackClient client) {
-				// Called when connect to AZStack server successfully
-				// You should start authentication here
-				if (!AzStackClient.getInstance().isAuthenticated()) {
-					AzStackClient.getInstance().authenticate();
-				}
+				// Connect and authenticate successfully, can start chatting, calling from here
 			}
 		});
 ```
-#### Authenticate
-Once connected, AZStack requires every users to be authenticated before they can send, receive message or make, receive a call. To authenticate, call AzStackClient.getInstance().authenticate() method in AzStackConnectListener.onConnectionConnected() like above instruction.
-
-```
-azStackClient.registerAuthenticateListenter(new AzStackAuthenticateListener() {
-
-			@Override
-			public void onDeauthenticated(AzStackClient client) {
-			}
-
-			@Override
-			public void onAuthenticationError(AzStackClient client, 
-						AzStackException e) {
-			}
-			
-
-			@Override
-			public void onAuthenticationChallenge(AzStackClient client, 
-						String nonce) {
-				//CODE goes here. Post the nonce to your backend. Generate and return an Identity Token
-				String authenToken = getToken(azStackUserID, nonce);
-						
-				//after get authenToken, you must call this method
-				azStackClient.answerAuthenticationChallenge(authenToken);
-			}
-
-			@Override
-			public void onAuthenticated(AzStackClient client, String arg1) {
-			}
-		});
-```
-Once the authenticate method is called, the onAuthenticationChallenge() callback executes with the nonce in the AzStackAuthenticateListener. You must set up your own Web Service to validate a user's credentials and create an Identity Token.
-That Identity Token is returned to your app, and then passed on to the AZStack server. If the Identity Token is valid, the Authentication process will complete.For more information about configuring your own Authentication Web Service check out the Web Service Authentication Guide
-
-#### Web Service Authentication Guide
-On authentication web service, you need to generate authentication token to return to the app. 
-
-Authentication token is generated by encrypting the following information:
-```
-{
-	"azStackUserID" : azStackUserID, identifier Of app'user.
-	"nonce" : nonce
-}
-```
-using RSA publicKey generated in step 1. You can refer to https://github.com/azstack/Backend-example/blob/master/gen_token_test.php for sample code.
 
 ### 3.4 AzStackUserListener
 AzStackUserListener must to be registered when initialize AzStackClient object. It's used to get basic information of app's user such as: name, avatar...  display on chat, call screen.
@@ -324,14 +276,21 @@ Parameter: 	context: The context to create group
 When create new group chat, the app navigates to select users screen. To make this screen work fine, you must implement the method getListFriend() of AzStackUserListener when initialize AZStack service. 
 In getListFriend() method, list user info is returned via JSONArray object. You can check the sample for more detail how to implement this method.
 
-### 4.4 Disconnect
+### 4.4 Update info
+Update your info for push notification
+
+```
+azStackClient.updateMyInfo(newName);
+```
+
+### 4.5 Disconnect
 Disconnect from AZStack server
 
 ```
 azStackClient.disconnect();
 ```
 
-### 4.5 Logout
+### 4.6 Logout
 Disconnect from AZStack server and clear all cached data on client
 
 ```
@@ -357,17 +316,17 @@ Note the alphanumeric API Key. You will need to input this key into the AZStack 
 ![AZStack GCM](http://azstack.com/docs/static/gcm/7.png "AZStack GCM")
 
 ### 5.2 Set up Google Cloud Messaging in AZStack Dashboard
-Update soon when the Dashboard is released. Currently, please contact us to update Server API key directly.
+Go to your project's Dashboard, choose Push -> Configure for Android -> Add credentials. Enter the Server API key(which created in 5.1), project package name.
 ### 5.3 Set up Google Cloud Messaging in client code
 First, following this link https://developers.google.com/cloud-messaging/android/start to get configuration file google-services.json.
 
 Copy google-services.json file into the app/ directory of your Android Studio project.
 
-Instantiate AzStackClient with your sender id via Options object.
+Instantiate AzStackClient with your sender id via Options object. The sender id is the Project number which created in 5.1.
 ```
 AzOptions azOptions = new AzOptions ();
 azOptions.setGoogleCloudMessagingId(senderId);			
-AzStackClient azStackClient = AzStackClient.newInstance(this, appId, azOptions);
+AzStackClient azStackClient = AzStackClient.newInstance(this, appId, publicKey, userCredentials, azOptions);
 ```
 
 You have to declare some permissions for push notification in AndroidManifest.xml
@@ -422,11 +381,12 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         // Implement connect AZStack service here
+		AzStackClient.getInstance().showNotification(this, data);
     }
 }
 ```
 
-In onMessageReceived method, you only need connect to AZStack service as described in #3.
+In onMessageReceived method, you need connect to AZStack service as described in #3 and call AzStackClient.getInstance().showNotification(context, data) method.
 
 # 6. UI customization
 AZStack SDK allows developers to change some basic attributes of chat, call screen via AzUI object.
