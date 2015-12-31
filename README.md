@@ -9,7 +9,7 @@ This Quick Start guide will help you run a sample project powered by AZStack as 
 
 # 2. Setup and installation
 To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://beta.developer.azstack.com.
-When you create account successfully, AZStack provide you an application ID(appId) and a RSA key pair(public key is used on your application, private key is used on your server).
+When you create account successfully, AZStack provide you an application ID (appId) and a RSA key pair (public key is used on your application, private key is used on your server).
 
 ![AZStack create account](http://azstack.com/docs/static/azstack_create_account.png "AZStack create account")
 
@@ -33,7 +33,7 @@ dependencies {
 
 ### 2.2. AndroidManifest.xml
 #### Set up permissions and references
-The AZStack SDK requires some permissions(activities, gcm receivers, google map api key...) and references from your app's AndroidManifest.xml file. These permissions allow the SDK to monitor network state and receive Google Cloud Messaging messages... Below is an example with a com.example package; replace with your own package when merging with your own manifest.
+The AZStack SDK requires some permissions (activities, gcm receivers, google map api key...) and references from your app's AndroidManifest.xml file. These permissions allow the SDK to monitor network state and receive Google Cloud Messaging messages... Below is an example with a com.example package; replace with your own package when merging with your own manifest.
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -166,7 +166,7 @@ AZStack SDK has sending location function which using Google Maps Android API. I
 
 # 3. Connecting
 ### 3.1 Instantiate
-Each application must register with AZStack for 1 appID, 1 RSA key pair(public key is used on your application, private key is used on your server). For example: 
+Each application must register with AZStack for 1 appID, 1 RSA key pair (public key is used on your application, private key is used on your server). For example: 
 ```
 String appId = "26870527d2ac628002dda81be54217cf";   
 String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq9s407QkMiZkXF0juCGj ti6iWUDzqEmP+Urs3+g2zOf+rbIAZVZItS5a4BZlv3Dux3Xnmhrz240OZMBO1cNc poEQNij1duZlpJY8BJiptlrj3C+K/PSp0ijllnckwvYYpApm3RxC8ITvpmY3IZTr RKloC/XoRe39p68ARtxXKKW5I/YYxFucY91b6AEOUNaqMFEdLzpO/Dgccaxoc+N1 SMfZOKue7aH0ZQIksLN7OQGVoiuf9wR2iSz3+FA+mMzRIP+lDxI4JE42Vvn1sYmM CY1GkkWUSzdQsfgnAIvnbepM2E4/95yMdRPP/k2Qdq9ja/mwEMTfA0yPUZ7Liywo ZwIDAQAB"
@@ -253,7 +253,7 @@ azStackClient.registerUserListener(new AzStackUserListener() {
         });
 ```
 
-In the getUserInfo(String azStackUserId, int purpose) method, you must return app's user information(azStackUserId, name, avatar) via JSONObject and call azStackClient.getUserInfoComplete(obContact, purpose) method. These information will be displayed on chat, call screen.
+In the getUserInfo(String azStackUserId, int purpose) method, you must return app's user information (azStackUserId, name, avatar) via JSONObject and call azStackClient.getUserInfoComplete(obContact, purpose) method. These information will be displayed on chat, call screen.
 
 # 4. API
 ### 4.1 Start chat
