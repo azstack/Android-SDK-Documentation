@@ -11,7 +11,7 @@ This Quick Start guide will help you run a sample project powered by AZStack as 
 To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://beta.developer.azstack.com.
 When you create account successfully, AZStack provide you an application ID(appId) and a RSA key pair(public key is used on your application, private key is used on your server).
 
-![AZStack create account](http://azstack.com/docs/static/azstack_create_account.png "AZStack init and authentication")
+![AZStack create account](http://azstack.com/docs/static/azstack_create_account.png "AZStack create account")
 
 AZStack SDK is built and designed to be used with Android Studio. The following instructions will help you to integrate AZStack into your application:
 ### 2.1. Adding AAR
@@ -29,7 +29,7 @@ dependencies {
 }
 ```
 
-![Add AAR lib](http://azstack.com/docs/static/android_add_lib.png "AZStack init and authentication")
+![Add AAR lib](http://azstack.com/docs/static/android_add_lib.png "Add AAR lib")
 
 ### 2.2. AndroidManifest.xml
 #### Set up permissions and references
@@ -194,9 +194,10 @@ The process is described in the following model:
 Connect and authenticate with AZStack Server with your azStackUserId, userCredentials, name. 
 ```
 azStackClient.connect(String azStackUserId, String userCredentials, String name);
-azStackUserId: your user id on your system, as described above
-userCredentials: can be your password, token on your system. azStackUserId and userCredentails are used to authenticate on your server.
-name: optional, used to display on push notification.
+
+Parameter: 	azStackUserId: your user id on your system, as described above
+			userCredentials: can be your password, token on your system. AZStack will not use this information. It's forwared to your server to authenticate your user.
+			name: optional, used to display on push notification.
 ```
 
 You must register AzStackConnectListener for listening connection,authentication events such as: connected, disconnected, connect failed...
