@@ -1,5 +1,5 @@
 # 1. Quick Start
-AZStack is the full-stack building block for communications.
+AZStack is the communication platform which provides SDK, API to add chatting, calling features to the third-party mobile applications or websites.
 This Quick Start guide will help you run a sample project powered by AZStack as fast as possible. To run the sample project, you will need Android Studio installed
 
 ```
@@ -9,7 +9,10 @@ This Quick Start guide will help you run a sample project powered by AZStack as 
 
 # 2. Setup and installation
 To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://beta.developer.azstack.com.
-When you create account successfully, AZStack provide you an application ID(appId) and a RSA public key to be used in your application.
+When you create account successfully, AZStack provide you an application ID(appId) and a RSA key pair(public key is used on your application, private key is used on your server).
+
+![AZStack create account](http://azstack.com/docs/static/azstack_create_account.png "AZStack init and authentication")
+
 AZStack SDK is built and designed to be used with Android Studio. The following instructions will help you to integrate AZStack into your application:
 ### 2.1. Adding AAR
 Copy AZStack.aar to libs folder at the app level
@@ -25,6 +28,8 @@ dependencies {
     compile(name: 'AZStackSDK', ext: 'aar')
 }
 ```
+
+![Add AAR lib](http://azstack.com/docs/static/android_add_lib.png "AZStack init and authentication")
 
 ### 2.2. AndroidManifest.xml
 #### Set up permissions and references
