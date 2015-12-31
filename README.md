@@ -7,7 +7,7 @@ This Quick Start guide will help you run a sample project powered by AZStack as 
 2. Open and run in Android Studio
 ```
 
-# 2. Settup and installation
+# 2. Setup and installation
 To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://beta.developer.azstack.com.
 When you create account successfully, AZStack provide you an application ID(appId) and a RSA public key to be used in your application.
 AZStack SDK is built and designed to be used with Android Studio. The following instructions will help you to integrate AZStack into your application:
@@ -161,7 +161,7 @@ AZStack SDK has sending location function which using Google Maps Android API. I
 
 # 3. Connecting
 ### 3.1 Instantiate
-Each application must register with AZStack for 1 appID, 1 RSA public key. For example: 
+Each application must register with AZStack for 1 appID, 1 RSA key pair(public key is used on your application, private key is used on your server). For example: 
 ```
 String appId = "26870527d2ac628002dda81be54217cf";   
 String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq9s407QkMiZkXF0juCGj ti6iWUDzqEmP+Urs3+g2zOf+rbIAZVZItS5a4BZlv3Dux3Xnmhrz240OZMBO1cNc poEQNij1duZlpJY8BJiptlrj3C+K/PSp0ijllnckwvYYpApm3RxC8ITvpmY3IZTr RKloC/XoRe39p68ARtxXKKW5I/YYxFucY91b6AEOUNaqMFEdLzpO/Dgccaxoc+N1 SMfZOKue7aH0ZQIksLN7OQGVoiuf9wR2iSz3+FA+mMzRIP+lDxI4JE42Vvn1sYmM CY1GkkWUSzdQsfgnAIvnbepM2E4/95yMdRPP/k2Qdq9ja/mwEMTfA0yPUZ7Liywo ZwIDAQAB"
@@ -169,7 +169,7 @@ String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq9s407QkMiZkXF0j
 
 The AZStack SDK has a primary interface AzStackClient for interacting with AZStack service. You have to initialize AzStackClient object in onCreate() method of your Application or your main Activity.. Only once instance of AzStackClient should be instantiated and used all time:
 ```
-AzStackClient azStackClient = AzStackClient.newInstance(context, appId, publicKey, userCredentials);
+AzStackClient azStackClient = AzStackClient.newInstance(Context context,String appId,String publicKey);
 ```
 
 ### 3.2 Listeners
@@ -180,15 +180,18 @@ azStackClient.registerUserListener(AzStackUserListener instance)
 ```
 
 ### 3.3 Connect and authenticate
-In order for a user to chat or call, you must authenticate them first. AZStack will accept any unique String as a User ID (UIDs, email addresses, phone numbers, usernames, etc), so you can use any new or existing User Management system.
+In order to a user to chat or call, you must authenticate them first. AZStack will accept any unique String as a User ID (UIDs, email addresses, phone numbers, usernames, etc), which we call as azStackUserId. So you can use any new or existing User Management system.
 The process is described in the following model:
 
-![AZStack init and authentication](http://azstack.com/docs/static/AndroidAuthentication2.png "AZStack init and authentication")
+![AZStack init and authentication](http://azstack.com/docs/static/android_authentication.png "AZStack init and authentication")
 
 #### Connect and authenticate AZStack Server
-Connect and authenticate with AZStack Server with your azStackUserId and your name
+Connect and authenticate with AZStack Server with your azStackUserId, userCredentials, name. 
 ```
-azStackClient.connect(String azStackUserId, String name);
+azStackClient.connect(String azStackUserId, String userCredentials, String name);
+azStackUserId: your user id on your system, as described above
+userCredentials: can be your password, token on your system. azStackUserId and userCredentails are used to authenticate on your server.
+name: optional, used to display on push notification.
 ```
 
 You must register AzStackConnectListener for listening connection,authentication events such as: connected, disconnected, connect failed...
