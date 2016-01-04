@@ -188,7 +188,7 @@ azStackClient.registerUserListener(AzStackUserListener instance)
 In order to a user to chat or call, you must authenticate them first. AZStack will accept any unique String as a User ID (UIDs, email addresses, phone numbers, usernames, etc), which we call as azStackUserId. So you can use any new or existing User Management system.
 The process is described in the following model:
 
-![AZStack init and authentication](http://azstack.com/docs/static/android_authentication.png "AZStack init and authentication")
+![AZStack init and authentication](http://azstack.com/docs/static/Android_Connect_Authenticate.png "AZStack init and authentication")
 
 #### Step 0
 Go to http://developer.azstack.com/
