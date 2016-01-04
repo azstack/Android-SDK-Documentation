@@ -190,17 +190,27 @@ The process is described in the following model:
 
 ![AZStack init and authentication](http://azstack.com/docs/static/android_authentication.png "AZStack init and authentication")
 
+<<<<<<< HEAD
 #### Step 0
 Go to http://developer.azstack.com/ 
+=======
+#### Step 0: Go to http://developer.azstack.com/ 
+>>>>>>> b371bd02de7b74f1f2698ab3b16d73a72df446dc
 	a. Create project
 	b. Generate keys
 	c. Update Authentication URL which used to authenticate user between AZStack and your backend.
 
+<<<<<<< HEAD
 #### Step 1
 Initialize SDK with your appID, public key as described in 3.1
 
 #### Step 2
 Call  azStackClient.connect(String azStackUserId, String userCredentials, String name) method to start connecting, autheticating process
+=======
+#### Step 1: Initialize SDK with your appID, public key as described in 3.1
+
+#### Step 2: Call  azStackClient.connect(String azStackUserId, String userCredentials, String name) method to start connecting, autheticating process
+>>>>>>> b371bd02de7b74f1f2698ab3b16d73a72df446dc
 ```
 azStackClient.connect(String azStackUserId, String userCredentials, String name);
 
@@ -231,15 +241,23 @@ azStackClient.registerConnectionListenter(new AzStackConnectListener() {
 		});
 ```
 
+<<<<<<< HEAD
 ### Step 3
 After calling connect method, AZStack SDK will encrypt the following string:
+=======
+### Step 3: After calling connect method, AZStack SDK will encrypt the following string:
+>>>>>>> b371bd02de7b74f1f2698ab3b16d73a72df446dc
 ```
 {"azStackUserID":"...", "userCredentials":"..."}
 ```
 using RSA 2048 algorithm with your public key. The Identity Token is returned and will be sent to AZStack server.
 
+<<<<<<< HEAD
 #### Step 4
 AZStack decrypts Identity Token using RSA 2048 algorithm with the private key generated at step 0. Then AZStack will use the public key generated at step 0 to encrypt the following string:
+=======
+#### Step 4: AZStack decrypts Identity Token using RSA 2048 algorithm with the private key generated at step 0. Then AZStack will use the public key generated at step 0 to encrypt the following string:
+>>>>>>> b371bd02de7b74f1f2698ab3b16d73a72df446dc
 ```
 {"azStackUserID":"...", "userCredentials":"...", "timestamp": ..., "appId":"...", "code":"..."}
 ```
@@ -249,8 +267,12 @@ md5(appId + "_" + timestamp + "_" + secret_code)
 ```
 The encryption process returns Authentication Token. AZStack will send the Authentication Token to your server via Authentication URL (updated at step 0).
 
+<<<<<<< HEAD
 #### Step 5
 On your server side, you need decrypt Authentication Token receiving from AZStack server to get the "code". Compare "code" with the following string:
+=======
+#### Step 5: On your server side, you need decrypt Authentication Token receiving from AZStack server to get the "code". Compare "code" with the following string:
+>>>>>>> b371bd02de7b74f1f2698ab3b16d73a72df446dc
 ```
 md5(appId + "_" + timestamp + "_" + secret_code)
 ```
