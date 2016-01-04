@@ -192,9 +192,11 @@ The process is described in the following model:
 
 #### Step 0
 Go to http://developer.azstack.com/
+```
 	a. Create project
 	b. Generate keys
 	c. Update Authentication URL which used to authenticate user between AZStack and your backend.
+```
 
 #### Step 1
 Initialize SDK with your appID, public key as described in 3.1
