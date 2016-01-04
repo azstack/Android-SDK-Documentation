@@ -8,7 +8,7 @@ This Quick Start guide will help you run a sample project powered by AZStack as 
 ```
 
 # 2. Setup and installation
-To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://beta.developer.azstack.com.
+To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://developer.azstack.co
 When you create account successfully, AZStack provide you an application ID (appId) and a RSA key pair (public key is used on your application, private key is used on your server).
 
 ![AZStack create account](http://azstack.com/docs/static/azstack_create_account.png "AZStack create account")
@@ -190,8 +190,14 @@ The process is described in the following model:
 
 ![AZStack init and authentication](http://azstack.com/docs/static/android_authentication.png "AZStack init and authentication")
 
-#### Connect and authenticate AZStack Server
-Connect and authenticate with AZStack Server with your azStackUserId, userCredentials, name. 
+#### Step 0: Go to http://developer.azstack.com/ 
+	a. Create project
+	b. Generate keys
+	c. Update Authentication URL which used to authenticate user between AZStack and your backend.
+
+#### Step 1: Initialize SDK with your appID, public key as described in 3.1
+
+#### Step 2: Call  azStackClient.connect(String azStackUserId, String userCredentials, String name) method to start connecting, autheticating process
 ```
 azStackClient.connect(String azStackUserId, String userCredentials, String name);
 
@@ -221,6 +227,28 @@ azStackClient.registerConnectionListenter(new AzStackConnectListener() {
 			}
 		});
 ```
+
+### Step 3: After calling connect method, AZStack SDK will encrypt the following string:
+```
+{"azStackUserID":"...", "userCredentials":"..."}
+```
+using RSA 2048 algorithm with your public key. The Identity Token is returned and will be sent to AZStack server.
+
+#### Step 4: AZStack decrypts Identity Token using RSA 2048 algorithm with the private key generated at step 0. Then AZStack will use the public key generated at step 0 to encrypt the following string:
+```
+{"azStackUserID":"...", "userCredentials":"...", "timestamp": ..., "appId":"...", "code":"..."}
+```
+"code" is generated as below:
+```
+md5(appId + "_" + timestamp + "_" + secret_code)
+```
+The encryption process returns Authentication Token. AZStack will send the Authentication Token to your server via Authentication URL (updated at step 0).
+
+#### Step 5: On your server side, you need decrypt Authentication Token receiving from AZStack server to get the "code". Compare "code" with the following string:
+```
+md5(appId + "_" + timestamp + "_" + secret_code)
+```
+If they are the same, execute authentication with azStackUserID and userCredentials on your backend. Please see sample code writing in PHP here: https://github.com/azstack/Backend-example/blob/master/php/azstack_authentication.php
 
 ### 3.4 AzStackUserListener
 AzStackUserListener must to be registered when initialize AzStackClient object. It's used to get basic information of app's user such as: name, avatar...  display on chat, call screen.
