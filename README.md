@@ -292,36 +292,36 @@ azStackClient.registerUserListener(new AzStackUserListener() {
 In the getUserInfo(String azStackUserId, int purpose) method, you must return app's user information (azStackUserId, name, avatar) via JSONObject and call azStackClient.getUserInfoComplete(obContact, purpose) method. These information will be displayed on chat, call screen.
 
 # 4. API
-### 4.1 Start chat
+### 4.1 Chat with a user
 ```
 azStackClient.startChat(Context context, String azStackUserId, String name, String avatar);
 
-Parameter: 	context: The context to start chat
+Parameter: 	context: The context to start chat, required
 			azStackUserId: identifier of app’s user, required
 			name: name of app’s user, default “No name”, optional
 			avatar: avatar of app’s user, optional
 ```
 
-### 4.2 Start call
+### 4.2 Call to a user
 ```
 azStackClient.startCall(Context context, String azStackUserId, String name, String avatar);
 
-Parameter: 	context: The context to start call
+Parameter: 	context: The context to start call, required
 			azStackUserId: identifier of app’s user, required
 			name: name of app’s user, default “No name”, optional
 			avatar: avatar of app’s user, optional
 ```
 
-### 4.3 Create group chat
+### 4.3 Create a chat group
 ```
 azStackClient.createGroup(Context context);
 
-Parameter: 	context: The context to create group
+Parameter: 	context: The context to create group, required
 ```
 When create new group chat, the app navigates to select users screen. To make this screen work fine, you must implement the method getListFriend() of AzStackUserListener when initialize AZStack service. 
 In getListFriend() method, list user info is returned via JSONArray object. You can check the sample for more detail how to implement this method.
 
-### 4.4 Update info
+### 4.4 Update user's information
 Update your info for push notification
 
 ```
