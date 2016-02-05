@@ -15,7 +15,7 @@ When you create account successfully, AZStack provide you an application ID (app
 
 AZStack SDK is built and designed to be used with Android Studio. The following instructions will help you to integrate AZStack into your application:
 ### 2.1. Adding AAR
-Copy AZStack.aar to libs folder at the app level
+Copy AZStack-version.aar (https://github.com/azstack/Android-SDK) to libs folder at the app level
 Navigate to build.gradle file at the app level and adding the following lines:
 ```
 repositories {
@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    compile(name: 'AZStackSDK', ext: 'aar')
+    compile(name: 'AZStackSDK-version', ext: 'aar')
 }
 ```
 
