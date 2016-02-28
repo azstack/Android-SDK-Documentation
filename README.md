@@ -149,6 +149,14 @@ The AZStack SDK requires some permissions (activities, gcm receivers, google map
             android:name="com.azstack.activity.SelectContactChatGroupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AzStackTheme.Light" />
+		<activity
+            android:name="com.azstack.activity.StickerDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AzStackTheme.Light"></activity>
+        <activity
+            android:name="com.azstack.activity.StickerListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AzStackTheme.Light"></activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -265,12 +273,12 @@ AzStackUserListener must to be registered when initialize AzStackClient object. 
 azStackClient.registerUserListener(new AzStackUserListener() {
 
             @Override
-            public void getUserInfo(String azStackUserId, int purpose) {
+            public void getUserInfo(List<String> azStackUserIds, int purpose) {
                 // This code implemention is only for testing purpose
                 // When going into production, you have to implement your own
                 // web service to get your app's user info
-                JSONObject obContact = getUserInfo(azStackUserId);
-                azStackClient.getUserInfoComplete(obContact, purpose);
+                JSONArray arrayContact = getUserInfo(azStackUserIds);
+                azStackClient.getUserInfoComplete(arrayContact, purpose);
             }
 
             @Override
@@ -289,7 +297,7 @@ azStackClient.registerUserListener(new AzStackUserListener() {
         });
 ```
 
-In the getUserInfo(String azStackUserId, int purpose) method, you must return app's user information (azStackUserId, name, avatar) via JSONObject and call azStackClient.getUserInfoComplete(obContact, purpose) method. These information will be displayed on chat, call screen.
+In the getUserInfo(List<String> azStackUserIds, int purpose) method, you must return app's user information (azStackUserId, name, avatar) via JSONArray and call azStackClient.getUserInfoComplete(arrayContact, purpose) method. These information will be displayed on chat, call screen. You can check the sample for more detail how to implement this method.
 
 # 4. API
 ### 4.1 Chat with a user
