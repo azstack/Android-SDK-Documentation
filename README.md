@@ -1,6 +1,6 @@
 # 1. Quick Start
 AZStack is the communication platform which provides SDK, API to add chatting, calling features to the third-party mobile applications or websites.
-This Quick Start guide will help you run a sample project powered by AZStack as fast as possible. To run the sample project, you will need Android Studio installed
+This Quick Start guide will help you run a sample project powered by AZStack as fast as possible. To run the sample project, you will need Android Studio installed.
 
 ```
 1. Clone sample project from git hub: https://github.com/azstack/Android-SDK-Sample-Project.git
@@ -15,7 +15,7 @@ When you create account successfully, AZStack provide you an application ID (app
 
 AZStack SDK is built and designed to be used with Android Studio. The following instructions will help you to integrate AZStack into your application:
 ### 2.1. Adding AAR
-Copy AZStack-version.aar (https://github.com/azstack/Android-SDK) to libs folder at the app level
+Copy AZStack-version.aar (https://github.com/azstack/Android-SDK) to libs folder at the app level.
 Navigate to build.gradle file at the app level and adding the following lines:
 ```
 repositories {
@@ -33,7 +33,7 @@ dependencies {
 
 ### 2.2. AndroidManifest.xml
 #### Set up permissions and references
-The AZStack SDK requires some permissions (activities, gcm receivers, google map api key...) and references from your app's AndroidManifest.xml file. These permissions allow the SDK to monitor network state and receive Google Cloud Messaging messages... Below is an example with a com.example package; replace with your own package when merging with your own manifest.
+The AZStack SDK requires some permissions and references (activities, gcm receivers, google map api key...) from your app's AndroidManifest.xml file. These permissions allow the SDK to monitor network state and receive Google Cloud Messaging messages... Below is an example with a com.example package; replace with your own package when merging with your own manifest.
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -186,7 +186,7 @@ AzStackClient azStackClient = AzStackClient.newInstance(Context context,String a
 ```
 
 ### 3.2 Listeners
-The AZStack SDK uses listener pattern to push specific events to your application. You must register 2 listeners AzStackConnectListener, AzStackUserListener.
+The AZStack SDK uses listener pattern to push specific events to your application. You must register 2 listeners AzStackConnectListener, AzStackUserListener when initialize AzStackClient object.
 ```
 azStackClient.registerConnectionListenter(AzStackConnectListener instance)
 azStackClient.registerUserListener(AzStackUserListener instance)
@@ -267,7 +267,7 @@ md5(appId + "_" + timestamp + "_" + secret_code)
 If they are the same, execute authentication with azStackUserID and userCredentials on your backend. Please see sample code writing in PHP here: https://github.com/azstack/Backend-example/blob/master/php/azstack_authentication.php
 
 ### 3.4 AzStackUserListener
-AzStackUserListener must to be registered when initialize AzStackClient object. It's used to get basic information of app's user such as: name, avatar...  display on chat, call screen.
+AzStackUserListener must to be registered when initialize AzStackClient object. It's used to get basic information of app's user such as: name, avatar... to display on chat, call screen.
 
 ```
 azStackClient.registerUserListener(new AzStackUserListener() {
@@ -297,7 +297,7 @@ azStackClient.registerUserListener(new AzStackUserListener() {
         });
 ```
 
-In the getUserInfo(List<String> azStackUserIds, int purpose) method, you must return app's user information (azStackUserId, name, avatar) via JSONArray and call azStackClient.getUserInfoComplete(arrayContact, purpose) method. These information will be displayed on chat, call screen. You can check the sample for more detail how to implement this method.
+In the getUserInfo(List<String> azStackUserIds, int purpose) method, you need return users'information (including azStackUserId, name, avatar) equivalent to the list azStackUserIds via JSONArray. At the end of this medthod, you must call azStackClient.getUserInfoComplete(arrayContact, purpose) method. These information will be displayed on chat, call screen. You can check the sample for more detail how to implement this method.
 
 # 4. API
 ### 4.1 Chat with a user
@@ -326,8 +326,8 @@ azStackClient.createGroup(Context context);
 
 Parameter: 	context: The context to create group, required
 ```
-When create new group chat, the app navigates to select users screen. To make this screen work fine, you must implement the method getListFriend() of AzStackUserListener when initialize AZStack service. 
-In getListFriend() method, list user info is returned via JSONArray object. You can check the sample for more detail how to implement this method.
+When creating a new group chat, the app navigates to select users screen. To make this screen work fine, you must implement the method getListFriend() of AzStackUserListener when initialize AZStack service. 
+In getListFriend() method, the information of users (who you want to add to the group) is returned via JSONArray object. You can check the sample for more detail how to implement this method.
 
 ### 4.4 Update user's information
 Update your info for push notification
