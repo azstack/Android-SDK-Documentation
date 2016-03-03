@@ -8,8 +8,7 @@ This Quick Start guide will help you run a sample project powered by AZStack as 
 ```
 
 # 2. Setup and installation
-To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://developer.azstack.co
-After creating your account successfully, you need create a project. When a project is created, AZStack provides you an application ID (appId) and a RSA key pair (public key is used on your application, private key is used on your server).
+To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://developer.azstack.co. After creating your account successfully, you need create a project. When a project is created, AZStack provides you an application ID (appId) and a RSA key pair (public key is used on your application, private key is used on your server).
 
 ![AZStack create account](http://azstack.com/docs/static/azstack_create_account.png "AZStack create account")
 
