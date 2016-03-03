@@ -9,7 +9,7 @@ This Quick Start guide will help you run a sample project powered by AZStack as 
 
 # 2. Setup and installation
 To integerate AZStack SDK to your application, you need to create an AZStack account. If you do not have an AZStack account, sign up here: http://developer.azstack.co
-When you create account successfully, AZStack provide you an application ID (appId) and a RSA key pair (public key is used on your application, private key is used on your server).
+After creating your account successfully, you need create a project. When a project is created, AZStack provides you an application ID (appId) and a RSA key pair (public key is used on your application, private key is used on your server).
 
 ![AZStack create account](http://azstack.com/docs/static/azstack_create_account.png "AZStack create account")
 
@@ -26,6 +26,8 @@ repositories {
 
 dependencies {
     compile(name: 'AZStackSDK-version', ext: 'aar')
+	compile 'com.android.support:appcompat-v7:23.1.1'
+	compile 'com.google.android.gms:play-services:8.4.0'
 }
 ```
 
@@ -45,6 +47,8 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
         android:minSdkVersion="10"
         android:targetSdkVersion="21" />
 
+	<!-- AZStack permissions -->
+	
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="com.azstack.sample.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -61,7 +65,11 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+	
+	<!-- AZStack permissions -->
 
+	<!-- AZStack activities-->
+	
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -157,13 +165,19 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
             android:name="com.azstack.activity.StickerListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AzStackTheme.Light"></activity>
+		
+		<!-- AZStack activities-->
 
+		<!-- AZStack meta-data-->
+		
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDuqAE6o4Uj45SVyQstieg00BxxSA8ICAI" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+			
+		<!-- AZStack meta-data-->
     </application>
 	
 </manifest>
@@ -277,8 +291,19 @@ azStackClient.registerUserListener(new AzStackUserListener() {
                 // This code implemention is only for testing purpose
                 // When going into production, you have to implement your own
                 // web service to get your app's user info
-                JSONArray arrayContact = getUserInfo(azStackUserIds);
-                azStackClient.getUserInfoComplete(arrayContact, purpose);
+				try {
+                    JSONArray arrayContact = new JSONArray();
+                    for (String azStackUserId : azStackUserIds) {
+                        JSONObject ob = new JSONObject();
+                        ob.put("azStackUserId", azStackUserId);
+                        ob.put("name", name);
+                        ob.put("avatar", avatar);
+                        arrayContact.put(ob);
+                    }
+                    AzStackClient.getInstance().getUserInfoComplete(arrayContact, purpose);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
