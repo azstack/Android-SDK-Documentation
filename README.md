@@ -370,14 +370,14 @@ azStackClient.viewChatHistory(Context context);
 or use AzConversationFragment in your application.
 Important: if you use AzConversationFragment in your application, you must initialize AZStackClient object before using.
 
-### 4.5 Disconnect
+### 4.6 Disconnect
 Disconnect from AZStack server
 
 ```
 azStackClient.disconnect();
 ```
 
-### 4.6 Logout
+### 4.7 Logout
 Disconnect from AZStack server and clear all cached data on client
 
 ```
