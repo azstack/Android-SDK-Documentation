@@ -360,6 +360,16 @@ Update your info for push notification
 azStackClient.updateMyInfo(newName);
 ```
 
+### 4.5 Chat history
+To show chat history, you can call this method
+
+```
+azStackClient.viewChatHistory(Context context);
+```
+
+or use AzConversationFragment in your application.
+Important: if you use AzConversationFragment in your application, you must initialize AZStackClient object before using.
+
 ### 4.5 Disconnect
 Disconnect from AZStack server
 
