@@ -493,9 +493,5 @@ azUI.setHeaderColor(0xff4caf50);
 ```
 azUI.setNotificationIcon(R.mipmap.your_icon);
 ```
-### 6.3 Show/hide call menu in chat screen
-```
-azUI.setCallEnabled(boolean);
-```
 
 These methods need to be called only once time when you initialize AZStack SDK
