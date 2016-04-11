@@ -26,7 +26,10 @@ repositories {
 dependencies {
     compile(name: 'AZStackSDK-version', ext: 'aar')
 	compile 'com.android.support:appcompat-v7:23.1.1'
-	compile 'com.google.android.gms:play-services:8.4.0'
+	compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
+    compile 'com.google.android.gms:play-services-plus:8.4.0'
 }
 ```
 
