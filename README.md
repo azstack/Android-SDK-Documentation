@@ -17,20 +17,30 @@ AZStack SDK is built and designed to be used with Android Studio. The following 
 Copy AZStack-version.aar (download from https://developers.azstack.co) to libs folder at the app level.
 Navigate to build.gradle file at the app level and adding the following lines:
 ```
-repositories {
+	defaultConfig {
+        minSdkVersion 15
+        multiDexEnabled true	// if necessary
+    }
+
+	repositories {
         flatDir {
             dirs 'libs'
         }
-}
+	}
+	
+	dexOptions {				// if necessary
+        javaMaxHeapSize "4g"
+    }
 
-dependencies {
-    compile(name: 'AZStackSDK-version', ext: 'aar')
-	compile 'com.android.support:appcompat-v7:23.1.1'
-	compile 'com.google.android.gms:play-services-maps:8.4.0'
-    compile 'com.google.android.gms:play-services-gcm:8.4.0'
-    compile 'com.google.android.gms:play-services-location:8.4.0'
-    compile 'com.google.android.gms:play-services-plus:8.4.0'
-}
+	dependencies {
+		compile(name: 'AZStackSDK-version', ext: 'aar')
+		compile 'com.android.support:appcompat-v7:23.1.1'
+		compile 'com.google.android.gms:play-services-maps:8.4.0'
+		compile 'com.google.android.gms:play-services-gcm:8.4.0'
+		compile 'com.google.android.gms:play-services-location:8.4.0'
+		compile 'com.google.android.gms:play-services-plus:8.4.0'
+		compile 'com.android.support:multidex:1.0.1'	// if necessary
+	}
 ```
 
 ![Add AAR lib](http://azstack.com/docs/static/android_add_lib.png "Add AAR lib")
@@ -46,7 +56,7 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="15"
         android:targetSdkVersion="21" />
 
 	<!-- AZStack permissions -->
@@ -62,7 +72,6 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -91,17 +100,17 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
             android:theme="@style/AzStackTheme.Light"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="com.azstack.activity.FreeCallActivity"
+            android:name="com.azstack.activity.CallFromActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AzStackTheme.Light" />
         <activity
-            android:name="com.azstack.activity.IncomingCallActivity"
+            android:name="com.azstack.activity.CallToActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AzStackTheme.Light" />
         <activity
-            android:name="com.azstack.activity.ViewPhotoActivity"
+            android:name="com.azstack.activity.ViewPagerPhotoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -347,7 +356,17 @@ Parameter: 	context: The context to start call, required
 			avatar: avatar of app’s user, optional
 ```
 
-### 4.3 Create a chat group
+### 4.3 Video call to a user
+```
+azStackClient.startVideoCall(Context context, String azStackUserId, String name, String avatar);
+
+Parameter: 	context: The context to start call, required
+			azStackUserId: identifier of app’s user, required
+			name: name of app’s user, default “No name”, optional
+			avatar: avatar of app’s user, optional
+```
+
+### 4.4 Create a chat group
 ```
 azStackClient.createGroup(Context context);
 
@@ -356,14 +375,14 @@ Parameter: 	context: The context to create group, required
 When creating a new group chat, the app navigates to select users screen. To make this screen work fine, you must implement the method getListFriend() of AzStackUserListener when initialize AZStack service. 
 In getListFriend() method, the information of users (who you want to add to the group) is returned via JSONArray object. You can check the sample for more detail how to implement this method.
 
-### 4.4 Update user's information
+### 4.5 Update user's information
 Update your info for push notification
 
 ```
 azStackClient.updateMyInfo(newName);
 ```
 
-### 4.5 Chat history
+### 4.6 Chat history
 To show chat history, you can call this method
 
 ```
@@ -373,14 +392,14 @@ azStackClient.viewChatHistory(Context context);
 or use AzConversationFragment in your application.
 Important: if you use AzConversationFragment in your application, you must initialize AZStackClient object before using.
 
-### 4.6 Disconnect
+### 4.7 Disconnect
 Disconnect from AZStack server
 
 ```
 azStackClient.disconnect();
 ```
 
-### 4.7 Logout
+### 4.8 Logout
 Disconnect from AZStack server and clear all cached data on client
 
 ```
