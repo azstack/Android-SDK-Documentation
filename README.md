@@ -78,13 +78,14 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
     <uses-permission android:name="android.permission.GET_TASKS" />
 	
 	<!-- AZStack permissions -->
-
-	<!-- AZStack activities-->
-	
+		
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
+		
+		<!-- AZStack activities-->
+		
         <activity
             android:name="com.azstack.activity.ChatActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
@@ -435,7 +436,7 @@ Instantiate AzStackClient with your sender id via Options object. The sender id 
 ```
 AzOptions azOptions = new AzOptions ();
 azOptions.setGoogleCloudMessagingId(senderId);			
-AzStackClient azStackClient = AzStackClient.newInstance(this, appId, publicKey, userCredentials, azOptions);
+AzStackClient azStackClient = AzStackClient.newInstance(this, appId, publicKey, azOptions);
 ```
 
 You have to declare some permissions for push notification in AndroidManifest.xml
