@@ -45,6 +45,21 @@ Navigate to build.gradle file at the app level and adding the following lines:
 
 ![Add AAR lib](http://azstack.com/docs/static/android_add_lib.png "Add AAR lib")
 
+multiDexEnabled is optional. If you encounter build errors that indicate your app has reached a limit of the Android app build architecture, you must configure multiDexEnabled is true and your Application is MultiDexApplication. This error is reported as follows: 
+
+```
+Conversion to Dalvik format failed:
+Unable to execute dex: method ID not in [0, 0xffff]: 65536
+```
+
+```
+trouble writing output:
+Too many field references: 131000; max is 65536.
+You may try using --multi-dex option.
+```
+
+##### Important: Recently, Android Studio has problems with AppCompat v24. It causes AZStack SDK some errors. So AppCompat v23 must be used.
+
 ### 2.2. AndroidManifest.xml
 #### Set up permissions and references
 The AZStack SDK requires some permissions and references (activities, gcm receivers, google map api key...) from your app's AndroidManifest.xml file. These permissions allow the SDK to monitor network state and receive Google Cloud Messaging messages... Below is an example with a com.example package; replace with your own package when merging with your own manifest.
