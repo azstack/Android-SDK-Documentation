@@ -35,15 +35,15 @@ Navigate to build.gradle file at the app level and adding the following lines:
 	dependencies {
 		compile(name: 'AZStackSDK-version', ext: 'aar')
 		compile 'com.android.support:appcompat-v7:23.1.1'
-		compile 'com.google.android.gms:play-services-maps:8.4.0'
-		compile 'com.google.android.gms:play-services-gcm:8.4.0'
-		compile 'com.google.android.gms:play-services-location:8.4.0'
-		compile 'com.google.android.gms:play-services-plus:8.4.0'
+		compile 'com.google.android.gms:play-services-maps:9.4.0'
+		compile 'com.google.android.gms:play-services-gcm:9.4.0'
+		compile 'com.google.android.gms:play-services-location:9.4.0'
+		compile 'com.google.android.gms:play-services-plus:9.4.0'
 		compile 'com.android.support:multidex:1.0.1'	// if necessary
 	}
 ```
 
-![Add AAR lib](http://azstack.com/docs/static/android_add_lib.png "Add AAR lib")
+![Add AAR lib](http://azstack.com/docs/static/update_build_gradle.png "Add AAR lib")
 
 multiDexEnabled is optional. If you encounter build errors that indicate your app has reached a limit of the Android app build architecture, you must configure multiDexEnabled is true and your Application is MultiDexApplication. This error is reported as follows: 
 
@@ -58,7 +58,7 @@ Too many field references: 131000; max is 65536.
 You may try using --multi-dex option.
 ```
 
-##### Important: Recently, Android Studio has problems with AppCompat v24. It causes AZStack SDK some errors. So AppCompat v23 must be used.
+#### Important: Recently, Android Studio has problems with Google Play Services. It causes applications which integrated Google Cloud Messaging SDK crashed. It also affects our SDK because we also use GCM for push notification. To avoid this problem, play-services-v9 must be used.
 
 ### 2.2. AndroidManifest.xml
 #### Set up permissions and references
