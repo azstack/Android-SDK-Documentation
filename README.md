@@ -423,31 +423,34 @@ azStackClient.logout();
 ```
 
 # 5. Push notification
-### 5.1 Set up Google Cloud Messaging on Web
+### 5.1 Create API project
+We're using new Google Cloud Messaging for push notification. So you must create a Firebase project in the Firebase console for new Cloud Messaging projects.
+To create a FireBase project, follows instructions from https://developers.google.com/cloud-messaging/android/client
 
-Go to the Google Developer Console(https://console.developers.google.com/) and click Create a project
-![AZStack GCM](http://azstack.com/docs/static/gcm/1.png "AZStack GCM")
-Select the newly project and note the numeric Project number. This number is used for initializing AZStack SDK.
-![AZStack GCM](http://azstack.com/docs/static/gcm/2.png "AZStack GCM")
-Under API Manager, make sure that Google Cloud Messaging API is enabled. To do so, on the left menu navigate to API Manager -> Google APIs -> Mobile APIs, find Google Cloud Messaging and enable it.
-![AZStack GCM](http://azstack.com/docs/static/gcm/3.png "AZStack GCM")
-Next, you must create new Server API key under API Manager -> Credentials -> Add Credentials
-![AZStack GCM](http://azstack.com/docs/static/gcm/4.png "AZStack GCM")
-Choose Server key from popup
-![AZStack GCM](http://azstack.com/docs/static/gcm/5.png "AZStack GCM")
-Type 0.0.0.0/0 in the IP addresses field and Create
-![AZStack GCM](http://azstack.com/docs/static/gcm/6.png "AZStack GCM")
-Note the alphanumeric API Key. You will need to input this key into the AZStack Dashboard.
-![AZStack GCM](http://azstack.com/docs/static/gcm/7.png "AZStack GCM")
+After creating a new FireBase project, add Firebase to your Android app
+![Add FireBase to Android app](http://azstack.com/docs/static/firebase_add_project.png "Add FireBase to Android app")
+
+After adding app, download a google-services.json file.
 
 ### 5.2 Set up Google Cloud Messaging in AZStack Dashboard
-Go to your project's Dashboard, choose Push -> Configure for Android -> Add credentials. Enter the Server API key(which created in 5.1), project package name.
+Go to Firebase project console, choose Project Settings ==> Cloud Messaging, you'll get project keys including Server key and Sender Id.
+![Project keys](http://azstack.com/docs/static/firebase_key.png "Project keys")
+
+Go to your project's Dashboard, choose Push -> Configure for Android -> Add credentials. Enter the Server key, project package name.
 ### 5.3 Set up Google Cloud Messaging in client code
-First, following this link https://developers.google.com/cloud-messaging/android/start to get configuration file google-services.json.
+Copy google-services.json (from 5.1) file into the app/ directory of your Android Studio project.
 
-Copy google-services.json file into the app/ directory of your Android Studio project.
+Add the dependency to your project-level build.gradle:
+```
+classpath 'com.google.gms:google-services:3.0.0'
+```
 
-Instantiate AzStackClient with your sender id via Options object. The sender id is the Project number which created in 5.1.
+Add the plugin to your app-level build.gradle:
+```
+apply plugin: 'com.google.gms.google-services'
+```
+
+Instantiate AzStackClient with your Sender Id via Options object.
 ```
 AzOptions azOptions = new AzOptions ();
 azOptions.setGoogleCloudMessagingId(senderId);			
