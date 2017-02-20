@@ -124,6 +124,7 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
             android:name="com.azstack.activity.CallToActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
+			android:excludeFromRecents="true"
             android:theme="@style/AzStackTheme.Light" />
         <activity
             android:name="com.azstack.activity.ViewPagerPhotoActivity"
