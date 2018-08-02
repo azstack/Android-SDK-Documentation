@@ -34,7 +34,7 @@ Navigate to build.gradle file at the app level and adding the following lines:
 
 	dependencies {
 		implementation 'com.azstack.sdk:AzStackSDK:0.9'
-		implementation 'com.android.support:appcompat-v7:23.1.1'
+		implementation 'com.android.support:appcompat-v7:27.1.1'
 		implementation 'com.google.android.gms:play-services-maps:11.8.0'
 		implementation 'com.google.android.gms:play-services-gcm:11.8.0'
 		implementation 'com.google.android.gms:play-services-location:11.8.0'
