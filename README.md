@@ -33,17 +33,16 @@ Navigate to build.gradle file at the app level and adding the following lines:
     }
 
 	dependencies {
-		compile(name: 'AZStackSDK-version', ext: 'aar')
-		compile 'com.android.support:appcompat-v7:23.1.1'
-		compile 'com.google.android.gms:play-services-maps:9.4.0'
-		compile 'com.google.android.gms:play-services-gcm:9.4.0'
-		compile 'com.google.android.gms:play-services-location:9.4.0'
-		compile 'com.google.android.gms:play-services-plus:9.4.0'
-		compile 'com.android.support:multidex:1.0.1'	// if necessary
+		implementation 'com.azstack.sdk:AzStackSDK:0.9'
+		implementation 'com.android.support:appcompat-v7:23.1.1'
+		implementation 'com.google.android.gms:play-services-maps:9.4.0'
+		implementation 'com.google.android.gms:play-services-gcm:9.4.0'
+		implementation 'com.google.android.gms:play-services-location:9.4.0'
+		implementation 'com.google.android.gms:play-services-plus:9.4.0'
+		implementation 'com.android.support:multidex:1.0.1'	// if necessary
 	}
 ```
 
-![Add AAR lib](http://azstack.com/docs/static/update_build_gradle.png "Add AAR lib")
 
 multiDexEnabled is optional. If you encounter build errors that indicate your app has reached a limit of the Android app build architecture, you must configure multiDexEnabled is true and your Application is MultiDexApplication. This error is reported as follows: 
 
@@ -71,8 +70,8 @@ The AZStack SDK requires some permissions and references (activities, gcm receiv
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="21" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="27" />
 
 	<!-- AZStack permissions -->
 	
